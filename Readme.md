@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Юлия Вострикова](https://up.htmlacademy.ru/javascript/33/user/2546183).
-* Наставник: `Неизвестно`.
+* Наставник: [Артем Именин](https://htmlacademy.ru/profile/aimenin).
 
 ---
 
