@@ -18,6 +18,7 @@ function createPhotoDataArray () {
   }
   return PHOTO_DATA;
 }
+createPhotoDataArray();
 
 //Функция по возврату рандомного числа в пределах диапазона включительно
 const getRandomInteger = (min, max) => {
