@@ -13,3 +13,24 @@ function checkPalindrom(string) {
   return stringForCheck === normalizedString;
 }
 checkPalindrom('Dog and Cat');
+
+
+//Функция по переводу часв в минуты
+function makeHoursToMinutes (stringWithHours) {
+  stringWithHours = stringWithHours.split(':');
+  return stringWithHours[0] * 60 + Number(stringWithHours[1]);
+}
+
+//Функция по возврату true или false
+function isCorrectTimeForMeeting (startWorkTime, endWorkTime, startMeetingTime, meetingLength) {
+  const startWorkTimeInMinutes = makeHoursToMinutes(startWorkTime);
+  const endWorkTimeInMinutes = makeHoursToMinutes(endWorkTime);
+  const startMeetingTimeInMinutes = makeHoursToMinutes(startMeetingTime);
+
+
+  if(startWorkTimeInMinutes < startMeetingTimeInMinutes && (startMeetingTimeInMinutes + meetingLength) < endWorkTimeInMinutes) {
+    return true;
+  }
+  return false;
+}
+
