@@ -13,44 +13,44 @@ const COMMENTS_TO_PHOTOS = ['Всё отлично!','В целом всё не�
 const COMMENTATORS_TO_PHOTOS = ['Иван-царевич', 'Кот Баюн','Змей Горыныч','Никита Кожемяка','Василиса Премудрая','Аленушка','Илья Муромец','Алеша Попович','Добрыня Никитич','Забава Микулошна','Микула Селянинович','Крошечка-Ховрюшечка','Марфа Прекрасная','Чудо-юдо','Федот-стрелец','Емеля','Юнона и Авось','Руслан и Людмила','Елена Прекрасная','Сестрица Аленушка','Братец Иванушка','Алатырь-камень','Жар-птица','Конек-горбунок','Сивка-Бурка'];
 
 
-//Функция генератор массива из 25 объектов
-function createPhotoDataArray () {
-  const PHOTO_DATA = [];
-  for (let i = 0; i <= 25; i++) {
-    PHOTO_DATA.push(createPhotoDescription());
-  }
-  return PHOTO_DATA;
-}
-createPhotoDataArray();
-console.log(createPhotoDataArray());
-
 //Функция-генератор объектов
-const PHOTO_URL_NUMBER = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
-const AVATAR_IMAGE_NUMBER = getRandomIdFromRangeGenerator(AVATAR_ID_MIN, AVATAR_ID_MAX);
 const PHOTO_ID_GENERATOR = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
+const PHOTO_URL_NUMBER = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
+const PHOTO_DESCRIPTIONS_INDEX = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
 const LIKES_AMOUNT_GENRATOR = getRandomIdFromRangeGenerator(LIKES_MIN, LIKES_MAX);
 const COMMENTS_ID_GENERATOR = getRandomIdFromRangeGenerator(COMMENTS_ID_MIN, COMMENTS_ID_MAX);
+const AVATAR_IMAGE_NUMBER = getRandomIdFromRangeGenerator(AVATAR_ID_MIN, AVATAR_ID_MAX);
+const COMMENTS_TO_PHOTO_INDEX = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
+const COMMENTATORS_TO_PHOTOS_INDEX = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
 
-function createPhotoDescription () {
-  return {
-    id: PHOTO_ID_GENERATOR(),
-    url: `photos/${PHOTO_URL_NUMBER}.jpg`,
-    description: PHOTO_DESCRIPTIONS[PHOTO_ID_GENERATOR()],
-    likes: LIKES_AMOUNT_GENRATOR(),
-    comments: getPhotoComments(),
-  };
-}
+const createPhotoDescription = () => ({
+  id: PHOTO_ID_GENERATOR(),
+  url: `photos/${PHOTO_URL_NUMBER()}.jpg`,
+  description: PHOTO_DESCRIPTIONS[PHOTO_DESCRIPTIONS_INDEX()],
+  likes: LIKES_AMOUNT_GENRATOR(),
+  comments: getPhotoComments(),
+});
+
 
 //Функция-генератор комментариев для объекта
 function getPhotoComments() {
   return {
     id: COMMENTS_ID_GENERATOR(),
-    avatar: `img/avatar-${AVATAR_IMAGE_NUMBER}.svg`,
-    message: COMMENTS_TO_PHOTOS[PHOTO_ID_GENERATOR()],
-    name: COMMENTATORS_TO_PHOTOS[PHOTO_ID_GENERATOR()],
+    avatar: `img/avatar-${AVATAR_IMAGE_NUMBER()}.svg`,
+    message: COMMENTS_TO_PHOTOS[COMMENTS_TO_PHOTO_INDEX()],
+    name: COMMENTATORS_TO_PHOTOS[COMMENTATORS_TO_PHOTOS_INDEX()],
   };
 }
 
+//Функция генератор массива из 25 объектов
+const createPhotoDataArray = () => {
+  const PHOTO_DATA = [];
+  for (let i = 0; i <= 24; i++) {
+    PHOTO_DATA.push(createPhotoDescription());
+  }
+  return PHOTO_DATA;
+};
+console.log(createPhotoDataArray());
 
 export {ID_MIN,
   ID_MAX,
