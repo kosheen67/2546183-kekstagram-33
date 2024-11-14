@@ -17,17 +17,17 @@ const COMMENTATORS_TO_PHOTOS = ['Иван-царевич', 'Кот Баюн','З
 const PHOTO_ID_GENERATOR = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
 const PHOTO_URL_NUMBER = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
 const PHOTO_DESCRIPTIONS_INDEX = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
-const LIKES_AMOUNT_GENRATOR = getRandomIdFromRangeGenerator(LIKES_MIN, LIKES_MAX);
+const LIKES_AMOUNT_GENERATOR = getRandomIdFromRangeGenerator(LIKES_MIN, LIKES_MAX);
 const COMMENTS_ID_GENERATOR = getRandomIdFromRangeGenerator(COMMENTS_ID_MIN, COMMENTS_ID_MAX);
-const AVATAR_IMAGE_NUMBER = getRandomIdFromRangeGenerator(AVATAR_ID_MIN, AVATAR_ID_MAX);
-const COMMENTS_TO_PHOTO_INDEX = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
+const AVATAR_IMAGE_NUMBER = getRandomIdFromRangeGenerator(1, 6);
+const COMMENTS_TO_PHOTO_INDEX = getRandomIdFromRangeGenerator(1, 6);
 const COMMENTATORS_TO_PHOTOS_INDEX = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
 
 const createPhotoDescription = () => ({
   id: PHOTO_ID_GENERATOR(),
   url: `photos/${PHOTO_URL_NUMBER()}.jpg`,
   description: PHOTO_DESCRIPTIONS[PHOTO_DESCRIPTIONS_INDEX()],
-  likes: LIKES_AMOUNT_GENRATOR(),
+  likes: LIKES_AMOUNT_GENERATOR(),
   comments: getPhotoComments(),
 });
 
@@ -41,6 +41,22 @@ function getPhotoComments() {
     name: COMMENTATORS_TO_PHOTOS[COMMENTATORS_TO_PHOTOS_INDEX()],
   };
 }
+
+// function getPhotoComments() {
+//   const comments = [];
+//   const numberOfComments = COMMENTS_TO_PHOTO_INDEX ();
+
+//   for (let i = 0; i < numberOfComments; i++) {
+//     comments.push({
+//       id: COMMENTS_ID_GENERATOR(),
+//       avatar: `img/avatar-${AVATAR_IMAGE_NUMBER()}.svg`,
+//       message: COMMENTS_TO_PHOTOS[getRandomIdFromRangeGenerator(0, COMMENTS_TO_PHOTOS.length - 1)()],
+//       name: COMMENTATORS_TO_PHOTOS[getRandomIdFromRangeGenerator(0, COMMENTATORS_TO_PHOTOS.length - 1)()],
+//     });
+
+//   }
+//   return comments;
+// }
 
 //Функция генератор массива из 25 объектов
 const createPhotoDataArray = () => {
