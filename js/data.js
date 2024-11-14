@@ -1,4 +1,4 @@
-import {getRandomIdFromRangeGenerator} from './util.js';
+import {getRandomInteger, getRandomIdFromRangeGenerator} from './util.js';
 
 const ID_MIN = 1;
 const ID_MAX = 25;
@@ -19,7 +19,11 @@ const PHOTO_URL_NUMBER = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
 const PHOTO_DESCRIPTIONS_INDEX = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
 const LIKES_AMOUNT_GENERATOR = getRandomIdFromRangeGenerator(LIKES_MIN, LIKES_MAX);
 const COMMENTS_ID_GENERATOR = getRandomIdFromRangeGenerator(COMMENTS_ID_MIN, COMMENTS_ID_MAX);
+
+//Если заменить на getRandomInteger от 1 до 6, то он пишет в консоли, что AVATAR_IMAGE_NUMBER - not a function
 const AVATAR_IMAGE_NUMBER = getRandomIdFromRangeGenerator(1, 6);
+
+//Здесь скорее всего такая же ерунда будет
 const COMMENTS_TO_PHOTO_INDEX = getRandomIdFromRangeGenerator(1, 6);
 const COMMENTATORS_TO_PHOTOS_INDEX = getRandomIdFromRangeGenerator(ID_MIN, ID_MAX);
 
