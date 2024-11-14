@@ -10,6 +10,13 @@ const getRandomInteger = (min, max) => {
 getRandomInteger(1, 25);
 
 
+//Функция по возврату рандомного элемента маассива в пределах диапазона включительно
+function getRandomElementFromArray (array) {
+  const i = getRandomInteger(0, array.length - 1);
+  return array[i];
+}
+getRandomElementFromArray([1,2,3,4]);
+
 //Функция по возврату неповторяющегося числа в пределах диапазона включительно
 function getRandomIdFromRangeGenerator(min, max) {
   const previousValues = [];
@@ -27,18 +34,7 @@ function getRandomIdFromRangeGenerator(min, max) {
   };
 }
 const randomIdFromRangeGenerator = getRandomIdFromRangeGenerator(1, 25);
-console.log(randomIdFromRangeGenerator());
 
 const randomIdFromRangeGenerator2 = getRandomIdFromRangeGenerator(1, 25);
-console.log(randomIdFromRangeGenerator2());
-export { getRandomInteger, getRandomIdFromRangeGenerator };
 
-
-//Функция в функции
-function getNumber(number1) {
-  console.log(number1());
-}
-
-getNumber(randomIdFromRangeGenerator);
-
-
+export { getRandomInteger, getRandomElementFromArray, getRandomIdFromRangeGenerator };

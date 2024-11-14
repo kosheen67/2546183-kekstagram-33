@@ -10,7 +10,6 @@ import {ID_MIN,
   COMMENTS_TO_PHOTOS,
   COMMENTATORS_TO_PHOTOS,
   createPhotoDataArray,
-  PHOTO_URL_NUMBER,
-  AVATAR_IMAGE_NUMBER,
+  photoUrlNumber,
   createPhotoDescription,
   getPhotoComments} from './data.js';
