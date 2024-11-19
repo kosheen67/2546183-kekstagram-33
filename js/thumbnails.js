@@ -15,7 +15,6 @@ photoDataArray.forEach((element) => {
   const pictureElement = pictureLinkTemplate.cloneNode(true);
   pictureElement.querySelector('.picture__img').src = element.url;
   pictureElement.querySelector('.picture__img').src = element.url;
-  console.log(pictureElement);
 
   pictureElement.querySelector('.picture__img').alt = element.description;
 

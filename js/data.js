@@ -56,7 +56,6 @@ const createPhotoDataArray = () => {
   }
   return PHOTO_DATA;
 };
-console.log(createPhotoDataArray());
 
 export {ID_MIN,
   ID_MAX,
