@@ -69,6 +69,7 @@ const renderBigPictureDetails = ({url, description, likes}) => {
 
 const openUserModal = (data) => {
   bigPicture.classList.remove('hidden');
+  console.log(bigPicture)
   body.classList.add('modal-open');
 
   commentsCount.classList.add('hidden');
