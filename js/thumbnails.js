@@ -19,4 +19,5 @@ photoDataArray.forEach((data) => {
   pictureElement.querySelector('.picture__likes').textContent = likes;
   picturesListFragment.append(pictureElement);
 
-  pictureElement.addEventListener('click', () => openUserModal(data));
+  pictureElement.addEventListener('click', () =>  openUserModal(data));
+})
