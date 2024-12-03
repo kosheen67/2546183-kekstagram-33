@@ -8,7 +8,6 @@ const picturesListFragment = document.createDocumentFragment();
 
 const photoDataArray = createPhotoDataArray();
 
-
 photoDataArray.forEach((data) => {
   const {url, description, likes, comments} = data;
 
@@ -21,6 +20,3 @@ photoDataArray.forEach((data) => {
   picturesListFragment.append(pictureElement);
 
   pictureElement.addEventListener('click', () => openUserModal(data));
-});
-
-picturesContainer.append(picturesListFragment);
