@@ -34,7 +34,10 @@ function getRandomIdFromRangeGenerator(min, max) {
   };
 }
 const randomIdFromRangeGenerator = getRandomIdFromRangeGenerator(1, 25);
-
 const randomIdFromRangeGenerator2 = getRandomIdFromRangeGenerator(1, 25);
 
-export { getRandomInteger, getRandomElementFromArray, getRandomIdFromRangeGenerator };
+
+//Функция-проверка на соответствие ESC
+const isEscKey = (evt) => evt.key === 'Escape';
+
+export { getRandomInteger, getRandomElementFromArray, getRandomIdFromRangeGenerator, isEscKey };
