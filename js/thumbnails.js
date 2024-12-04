@@ -1,27 +1,24 @@
 import {createPhotoDataArray} from './data.js';
+import {openUserModal} from './big-picture.js';
 
 const picturesContainer = document.querySelector('.pictures');
-
-
 const pictureLinkTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 const picturesListFragment = document.createDocumentFragment();
 
 const photoDataArray = createPhotoDataArray();
 
-
-photoDataArray.forEach((element) => {
+photoDataArray.forEach((data) => {
+  const {url, description, likes, comments} = data;
 
   const pictureElement = pictureLinkTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = element.url;
-  pictureElement.querySelector('.picture__img').src = element.url;
-  console.log(pictureElement);
 
-  pictureElement.querySelector('.picture__img').alt = element.description;
-
-  pictureElement.querySelector('.picture__comments').textContent = element.comments;
-  pictureElement.querySelector('.picture__likes').textContent = element.likes;
+  pictureElement.querySelector('.picture__img').src = url;
+  pictureElement.querySelector('.picture__img').alt = description;
+  pictureElement.querySelector('.picture__comments').textContent = comments.length;
+  pictureElement.querySelector('.picture__likes').textContent = likes;
   picturesListFragment.append(pictureElement);
-});
 
-picturesContainer.append(picturesListFragment);
+  picturesContainer.append(picturesListFragment);
+
+  pictureElement.addEventListener('click', () =>  openUserModal(data))});
