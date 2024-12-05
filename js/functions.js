@@ -34,3 +34,5 @@ function isCorrectTimeForMeeting (startWorkTime, endWorkTime, startMeetingTime, 
   return false;
 }
 
+isCorrectTimeForMeeting();
+

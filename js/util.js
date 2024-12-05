@@ -33,9 +33,6 @@ function getRandomIdFromRangeGenerator(min, max) {
     return currentValue;
   };
 }
-const randomIdFromRangeGenerator = getRandomIdFromRangeGenerator(1, 25);
-const randomIdFromRangeGenerator2 = getRandomIdFromRangeGenerator(1, 25);
-
 
 //Функция-проверка на соответствие ESC
 const isEscKey = (evt) => evt.key === 'Escape';
