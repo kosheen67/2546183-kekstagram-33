@@ -13,6 +13,7 @@ const HASHTAG_UNVALID = /[^\w\u0400-\u04FF]/;
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_COUNT = 5;
+const MAX_COMMENT_LENGTH = 140;
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -66,6 +67,14 @@ pristine.addValidator(
   hashtagField,
   validateHashtags,
   'Недопустимый хэштег'
+);
+
+const hasValidCommentLength = (string) => string.length <= MAX_COMMENT_LENGTH;
+
+pristine.addValidator(
+  descriptionField,
+  hasValidCommentLength,
+  'Слишком длинный комментарий'
 );
 
 const onCancelUploadButtonClick = () => hideOverlay();
