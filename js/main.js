@@ -13,3 +13,4 @@ import {ID_MIN,
   photoUrlNumber,
   createPhotoDescription,
   getPhotoComments} from './data.js';
+  import './form-upload.js';
