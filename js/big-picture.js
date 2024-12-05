@@ -50,13 +50,13 @@ const createBigPicutersComment = ({avatar, name, message}) => {
 };
 
 const renderComments = () => {
-	commentsShown += COMMENTS_TO_SHOWN;
-	if (commentsShown >= comments.length) {
-		commentsLoader.classList.add('hidden');
-		commentsShown = comments.length;
-	  } else {
-		commentsLoader.classList.remove('hidden');
-	  }
+  commentsShown += COMMENTS_TO_SHOWN;
+  if (commentsShown >= comments.length) {
+    commentsLoader.classList.add('hidden');
+    commentsShown = comments.length;
+    } else {
+    commentsLoader.classList.remove('hidden');
+    }
 
   commentsList.innerHTML = '';
 
@@ -82,9 +82,7 @@ const renderBigPictureDetails = ({url, description, likes}) => {
 
 const openUserModal = (data) => {
   bigPicture.classList.remove('hidden');
-  console.log(bigPicture)
   body.classList.add('modal-open');
-
 
   renderBigPictureDetails(data);
   comments = data.comments;
