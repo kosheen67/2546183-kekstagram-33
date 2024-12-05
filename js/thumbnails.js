@@ -21,4 +21,5 @@ photoDataArray.forEach((data) => {
 
   picturesContainer.append(picturesListFragment);
 
-  pictureElement.addEventListener('click', () =>  openUserModal(data))});
+  pictureElement.addEventListener('click', () => openUserModal(data));
+});

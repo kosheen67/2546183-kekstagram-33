@@ -1,15 +1,2 @@
-import {ID_MIN,
-  ID_MAX,
-  PHOTO_DESCRIPTIONS,
-  LIKES_MIN,
-  LIKES_MAX,
-  COMMENTS_ID_MIN,
-  COMMENTS_ID_MAX,
-  AVATAR_ID_MIN,
-  AVATAR_ID_MAX,
-  COMMENTS_TO_PHOTOS,
-  COMMENTATORS_TO_PHOTOS,
-  createPhotoDataArray,
-  photoUrlNumber,
-  createPhotoDescription,
-  getPhotoComments} from './data.js';
+import './data.js';
+import './form-upload.js';
