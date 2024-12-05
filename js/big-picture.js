@@ -54,9 +54,9 @@ const renderComments = () => {
   if (commentsShown >= comments.length) {
     commentsLoader.classList.add('hidden');
     commentsShown = comments.length;
-    } else {
+  } else {
     commentsLoader.classList.remove('hidden');
-    }
+  }
 
   commentsList.innerHTML = '';
 
@@ -98,7 +98,6 @@ const onCommentsLoaderClick = () => renderComments();
 commentsLoader.addEventListener('click', (onCommentsLoaderClick));
 
 const onCloseModalButtonClick = () => closeUserModal();
-
 
 closeModalButton.addEventListener('click', (onCloseModalButtonClick));
 
