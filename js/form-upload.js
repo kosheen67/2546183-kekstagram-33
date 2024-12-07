@@ -1,5 +1,7 @@
 import { isEscKey } from './util.js';
 import './filter-change.js';
+import { showNotificationMessage } from './result-message-form.js';
+import { sendData } from './api.js';
 
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
@@ -8,6 +10,9 @@ const uploadFile = document.querySelector('#upload-file');
 const hashtagField = document.querySelector('.text__hashtags');
 const descriptionField = document.querySelector('.text__description');
 const cancelUploadButton = document.querySelector('.img-upload__cancel');
+const submitButton = form.querySelector('.img-upload__submit');
+const templateSuccess = document.querySelector('#success').content;
+const templateError = document.querySelector('#error').content;
 
 const HASHTAG_UNVALID = /[^\w\u0400-\u04FF]/;
 
@@ -30,12 +35,15 @@ const showOverlay = () => {
 };
 
 const hideOverlay = () => {
-  form.reset();
-  pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onEscKeydown);
+};
+
+const resetForm = () => {
+  form.reset();
+  pristine.reset();
 };
 
 const textFieldActive = () => document.activeElement === hashtagField || document.activeElement === descriptionField;
@@ -80,11 +88,43 @@ pristine.addValidator(
 
 const onCancelUploadButtonClick = () => hideOverlay();
 const onFileInputChange = () => showOverlay();
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Идет отправка';
 };
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
+const setUserFormSubmit = async (forElement) => {
+
+  const isValid = pristine.validate();
+  if(isValid) {
+    blockSubmitButton();
+    try {
+      await sendData(new FormData(forElement));
+      showNotificationMessage(templateSuccess);
+      hideOverlay();
+      resetForm();
+    } catch (error) {
+      showNotificationMessage(templateError);
+    } finally {
+      unblockSubmitButton();
+    }
+  }
+};
+
+const formSubmitHandler = (evt) => {
+  evt.preventDefault();
+  setUserFormSubmit(evt.target);
+};
+
+form.addEventListener('submit', formSubmitHandler);
 
 uploadFile.addEventListener('change', onFileInputChange);
 cancelUploadButton.addEventListener('click', onCancelUploadButtonClick);
-form.addEventListener('submit', onFormSubmit);
+
+export {setUserFormSubmit, showOverlay, hideOverlay};
