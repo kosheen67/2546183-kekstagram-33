@@ -13,7 +13,7 @@ const closeNotificationMessage = (evt) => {
   }
 };
 
-const showNotificationMessage = (template,) => {
+const showNotificationMessage = (template) => {
   const notificationNode = template.cloneNode(true);
   body.append(notificationNode);
   body.addEventListener('click', closeNotificationMessage);
