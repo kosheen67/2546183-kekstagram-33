@@ -36,7 +36,7 @@ const EFFECTS = [
     filter: 'invert',
     min: 0,
     max: 100,
-    step: 0.1,
+    step: 1,
     unit: '%',
     querySelector: document.querySelector('#effect-marvin'),
   },
@@ -107,7 +107,7 @@ EFFECTS.forEach((effect) => {
         },
         step: effect.step,
       });
-      effectLevelSlider.noUiSlider.set(effect.min);
+      effectLevelSlider.noUiSlider.set(effect.max);
       applyEffect();
       if (effect.effectName === 'none') {
         effectLevelContainer.style.display = 'none';

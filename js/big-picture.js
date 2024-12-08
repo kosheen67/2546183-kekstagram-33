@@ -13,6 +13,7 @@ const COMMENTS_TO_SHOWN = 5;
 let commentsShown = 0;
 let comments = [];
 
+
 const onDocumentKeydown = (evt) => {
   if (isEscKey(evt)) {
     evt.preventDefault();
@@ -65,12 +66,9 @@ const renderComments = () => {
   for (let i = 0; i < commentsShown; i++) {
     const commentElement = createBigPicutersComment(comments[i]);
     fragment.appendChild(commentElement);
-
   }
-
-
   commentsList.appendChild(fragment);
-  commentsCount.innerHTML = `<span class="social__comment-shown-count">${commentsShown}</span> из <span class="comments-count">${comments.length}</span> комментариев`;
+  commentsCount.innerHTML = `<span class="social__comment-shown-count">${commentsShown}</span> из <span class="social__comment-total-count">${comments.length}</span> комментариев`;
 };
 
 const renderBigPictureDetails = ({url, description, likes}) => {
