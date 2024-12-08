@@ -8,18 +8,23 @@ const picturesListFragment = document.createDocumentFragment();
 
 const photoDataArray = createPhotoDataArray();
 
-photoDataArray.forEach((data) => {
-  const {url, description, likes, comments} = data;
+function makePicturesOnPage() {
+  photoDataArray.forEach((data) => {
+    const {url, description, likes, comments} = data;
 
-  const pictureElement = pictureLinkTemplate.cloneNode(true);
+    const pictureElement = pictureLinkTemplate.cloneNode(true);
 
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__img').alt = description;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  picturesListFragment.append(pictureElement);
+    pictureElement.querySelector('.picture__img').src = url;
+    pictureElement.querySelector('.picture__img').alt = description;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length;
+    pictureElement.querySelector('.picture__likes').textContent = likes;
+    picturesListFragment.append(pictureElement);
 
-  picturesContainer.append(picturesListFragment);
+    picturesContainer.append(picturesListFragment);
 
-  pictureElement.addEventListener('click', () => openUserModal(data));
-});
+    pictureElement.addEventListener('click', () => openUserModal(data));
+    return picturesContainer;
+  });
+}
+
+export { makePicturesOnPage };

@@ -2,6 +2,9 @@ const smallerButton = document.querySelector('.scale__control--smaller');
 const biggerButton = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
 const imagePreview = document.querySelector('.img-upload__preview img');
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
+const STEP_SCALE = 25;
 let currentScale = 100;
 
 const updateScale = (newScaleValue) => {
@@ -11,14 +14,14 @@ const updateScale = (newScaleValue) => {
 };
 
 const onSmallerButtonClick = () => {
-  if (currentScale > 25) {
-    updateScale(currentScale - 25);
+  if (currentScale > MIN_SCALE) {
+    updateScale(currentScale - STEP_SCALE);
   }
 };
 
 const onBiggerButtonClick = () => {
-  if (currentScale < 100) {
-    updateScale(currentScale + 25);
+  if (currentScale < MAX_SCALE) {
+    updateScale(currentScale + STEP_SCALE);
   }
 };
 
