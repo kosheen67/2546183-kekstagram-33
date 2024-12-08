@@ -9,7 +9,7 @@ let currentScale = 100;
 
 const updateScale = (newScaleValue) => {
   currentScale = newScaleValue;
-  scaleValue.value = currentScale;
+  scaleValue.value = `${currentScale}%`;
   imagePreview.style.transform = `scale(${currentScale / 100})`;
 };
 

@@ -13,9 +13,12 @@ const cancelUploadButton = document.querySelector('.img-upload__cancel');
 const submitButton = form.querySelector('.img-upload__submit');
 const templateSuccess = document.querySelector('#success').content;
 const templateError = document.querySelector('#error').content;
+const photoPreview = document.querySelector('.img-upload__preview img');
+const effectsPreview = document.querySelectorAll('.effects__preview');
 
 const HASHTAG_UNVALID = /[^\w\u0400-\u04FF]/;
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_COUNT = 5;
@@ -52,6 +55,7 @@ function onEscKeydown(evt) {
   if (isEscKey(evt) && !textFieldActive()) {
     evt.preventDefault();
     hideOverlay();
+    resetForm();
   }
 }
 
@@ -87,7 +91,6 @@ pristine.addValidator(
 );
 
 const onCancelUploadButtonClick = () => hideOverlay();
-const onFileInputChange = () => showOverlay();
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
@@ -97,6 +100,23 @@ const blockSubmitButton = () => {
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = 'Опубликовать';
+};
+
+const isValidType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+};
+
+const onFileInputChange = () => {
+  const file = uploadFile.files[0];
+
+  if (file && isValidType(file)) {
+    photoPreview.src = URL.createObjectURL(file);
+    effectsPreview.forEach((preview) => {
+      preview.style.backgroundImage = `url('${photoPreview.src}')`;
+    });
+  }
+  showOverlay();
 };
 
 const setUserFormSubmit = async (forElement) => {
