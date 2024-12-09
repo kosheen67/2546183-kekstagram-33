@@ -5,19 +5,19 @@ import { sendData } from './api.js';
 
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
-const overlay = document.querySelector('.img-upload__overlay');
-const uploadFile = document.querySelector('#upload-file');
-const hashtagField = document.querySelector('.text__hashtags');
-const descriptionField = document.querySelector('.text__description');
-const cancelUploadButton = document.querySelector('.img-upload__cancel');
-const submitButton = form.querySelector('.img-upload__submit');
 const templateSuccess = document.querySelector('#success').content;
 const templateError = document.querySelector('#error').content;
-const photoPreview = document.querySelector('.img-upload__preview img');
-const effectsPreview = document.querySelectorAll('.effects__preview');
+const overlay = form.querySelector('.img-upload__overlay');
+const uploadFile = form.querySelector('#upload-file');
+const hashtagField = form.querySelector('.text__hashtags');
+const descriptionField = form.querySelector('.text__description');
+const cancelUploadButton = form.querySelector('.img-upload__cancel');
+const submitButton = form.querySelector('.img-upload__submit');
+const photoPreview = form.querySelector('.img-upload__preview img');
+const effectsPreview = form.querySelectorAll('.effects__preview');
+
 
 const HASHTAG_UNVALID = /[^\w\u0400-\u04FF]/;
-
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_HASHTAG_LENGTH = 20;
@@ -143,7 +143,6 @@ const formSubmitHandler = (evt) => {
 };
 
 form.addEventListener('submit', formSubmitHandler);
-
 uploadFile.addEventListener('change', onFileInputChange);
 cancelUploadButton.addEventListener('click', onCancelUploadButtonClick);
 

@@ -1,30 +1,34 @@
-import {createPhotoDataArray} from './data.js';
 import {openUserModal} from './big-picture.js';
 
-const picturesContainer = document.querySelector('.pictures');
-const pictureLinkTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const pictureSection = document.querySelector('.pictures');
+const pictureItemTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const picturesListFragment = document.createDocumentFragment();
+const createPictures = ((data) => {
+  const {url, description, likes, comments} = data;
 
-const photoDataArray = createPhotoDataArray();
+  const pictureElement = pictureItemTemplate.cloneNode(true);
 
-function makePicturesOnPage() {
-  photoDataArray.forEach((data) => {
-    const {url, description, likes, comments} = data;
+  pictureElement.querySelector('.picture__img').src = url;
+  pictureElement.querySelector('.picture__img').alt = description;
+  pictureElement.querySelector('.picture__likes').textContent = likes;
+  pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
-    const pictureElement = pictureLinkTemplate.cloneNode(true);
+  pictureElement.addEventListener('click', () => openUserModal(data));
 
-    pictureElement.querySelector('.picture__img').src = url;
-    pictureElement.querySelector('.picture__img').alt = description;
-    pictureElement.querySelector('.picture__comments').textContent = comments.length;
-    pictureElement.querySelector('.picture__likes').textContent = likes;
-    picturesListFragment.append(pictureElement);
+  return pictureElement;
+});
 
-    picturesContainer.append(picturesListFragment);
+const makePicturesOnPage = (pictures) => {
+  document.querySelectorAll('.picture').forEach((element) => element.remove());
 
-    pictureElement.addEventListener('click', () => openUserModal(data));
-    return picturesContainer;
+  const picturesListFragment = document.createDocumentFragment();
+
+  pictures.forEach((pictureElement) => {
+    const createElement = createPictures(pictureElement);
+    picturesListFragment.appendChild(createElement);
   });
-}
+
+  pictureSection.appendChild(picturesListFragment);
+};
 
 export { makePicturesOnPage };
