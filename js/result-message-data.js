@@ -10,6 +10,7 @@ const createDataErrorMessage = (message) => {
   }
   errorDataElement.querySelector('.data-error__title').textContent = message;
   body.appendChild(errorDataElement);
+
   const errorLoadDataElement = body.querySelector('.data-error');
 
   setTimeout(() => {

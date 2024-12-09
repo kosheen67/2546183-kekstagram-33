@@ -1,6 +1,4 @@
 
-import './data.js';
-import './form-upload.js';
 import {makePicturesOnPage} from './thumbnails.js';
 import {setUserFormSubmit, hideOverlay} from './form-upload.js';
 import './scale-change.js';
@@ -14,7 +12,6 @@ const TIMEOUT = 500;
 const bootstrap = async () => {
   try {
     const photos = await getData();
-
     const debouncedMakePicturesOnPage = debounce(makePicturesOnPage, TIMEOUT);
     applyFilter(photos, debouncedMakePicturesOnPage);
     makePicturesOnPage(filterPictures());

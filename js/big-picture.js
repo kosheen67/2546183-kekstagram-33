@@ -1,14 +1,15 @@
 import { isEscKey } from './util.js';
 
-const bigPicture = document.querySelector('.big-picture');//Третья секция в body
+const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');
-const commentsCount = document.querySelector('.social__comment-count');//5 из 125 комментариев
-const commentsList = document.querySelector('.social__comments');//список комментариев
-const commentsLoader = document.querySelector('.comments-loader');//Кнопка загрузки новых пяти комментариев
-const closeModalButton = document.querySelector('.big-picture__cancel');//Кнопка выхода из полноэкранного просомтра изображений
-const bigPictureClass = bigPicture.querySelector('.big-picture__img img');//Большая картинка
+const commentsCount = document.querySelector('.social__comment-count');
+const commentsList = document.querySelector('.social__comments');
+const commentsLoader = document.querySelector('.comments-loader');
+const closeModalButton = bigPicture.querySelector('.big-picture__cancel');
+const bigPictureClass = bigPicture.querySelector('.big-picture__img img');
 const bigPictureLikes = bigPicture.querySelector('.likes-count');
-const bigPicturesCaption = bigPicture.querySelector('.social__caption');//Подпись автора фотографии
+const bigPicturesCaption = bigPicture.querySelector('.social__caption');
+
 const COMMENTS_TO_SHOWN = 5;
 let commentsShown = 0;
 let comments = [];
@@ -52,6 +53,7 @@ const createBigPicutersComment = ({avatar, name, message}) => {
 
 const renderComments = () => {
   commentsShown += COMMENTS_TO_SHOWN;
+
   if (commentsShown >= comments.length) {
     commentsLoader.classList.add('hidden');
     commentsShown = comments.length;
@@ -62,7 +64,6 @@ const renderComments = () => {
   commentsList.innerHTML = '';
 
   const fragment = document.createDocumentFragment();
-
   for (let i = 0; i < commentsShown; i++) {
     const commentElement = createBigPicutersComment(comments[i]);
     fragment.appendChild(commentElement);
