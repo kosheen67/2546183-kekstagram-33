@@ -68,6 +68,7 @@ const renderComments = () => {
     const commentElement = createBigPicutersComment(comments[i]);
     fragment.appendChild(commentElement);
   }
+
   commentsList.appendChild(fragment);
   const commentsDisplay = `<span class="social__comment-shown-count">${commentsShown}</span> из <span class="social__comment-total-count">${comments.length}</span> комментариев`;
   commentsCount.innerHTML = commentsDisplay;
@@ -95,7 +96,7 @@ const openUserModal = (data) => {
 
 const onCommentsLoaderClick = () => renderComments();
 
-commentsLoader.addEventListener('click', (onCommentsLoaderClick));
+commentsLoader.addEventListener('click', (onCommentsLoaderClick()));
 
 const onCloseModalButtonClick = () => closeUserModal();
 
