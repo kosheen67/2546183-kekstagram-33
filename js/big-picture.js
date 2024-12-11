@@ -1,5 +1,6 @@
 import { isEscKey } from './util.js';
 
+const COMMENTS_TO_SHOWN = 5;
 const bigPicture = document.querySelector('.big-picture');
 const body = document.querySelector('body');
 const commentsCount = document.querySelector('.social__comment-count');
@@ -10,10 +11,8 @@ const bigPictureClass = bigPicture.querySelector('.big-picture__img img');
 const bigPictureLikes = bigPicture.querySelector('.likes-count');
 const bigPicturesCaption = bigPicture.querySelector('.social__caption');
 
-const COMMENTS_TO_SHOWN = 5;
 let commentsShown = 0;
 let comments = [];
-
 
 const onDocumentKeydown = (evt) => {
   if (isEscKey(evt)) {
@@ -96,7 +95,7 @@ const openUserModal = (data) => {
 
 const onCommentsLoaderClick = () => renderComments();
 
-commentsLoader.addEventListener('click', (onCommentsLoaderClick()));
+commentsLoader.addEventListener('click', (onCommentsLoaderClick));
 
 const onCloseModalButtonClick = () => closeUserModal();
 

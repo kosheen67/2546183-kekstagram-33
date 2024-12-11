@@ -1,4 +1,3 @@
-const imageFilterSection = document.querySelector('.img-filters');
 const Filter = {
   DEFAULT: 'filter-default',
   RANDOM: 'filter-random',
@@ -6,6 +5,9 @@ const Filter = {
 };
 
 const PICTURE_VIEW_COUNT = 10;
+
+const imageFilterSection = document.querySelector('.img-filters');
+
 let pictures = [];
 let currentFilter = Filter.DEFAULT;
 

@@ -4,13 +4,11 @@ const getRandomInteger = (min, max) => {
   const randomInteger = Math.random() * (maxInteger - minInteger + 1) + minInteger;
   return Math.floor(randomInteger);
 };
-getRandomInteger(1, 25);
 
-function getRandomElementFromArray (array) {
-  const i = getRandomInteger(0, array.length - 1);
-  return array[i];
+function getRandomElementFromArray (arrays) {
+  const i = getRandomInteger(0, arrays.length - 1);
+  return arrays[i];
 }
-getRandomElementFromArray([1,2,3,4]);
 
 function getRandomIdFromRangeGenerator(min, max) {
   const previousValues = [];

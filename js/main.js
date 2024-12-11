@@ -1,4 +1,3 @@
-
 import {makePicturesOnPage} from './thumbnails.js';
 import {setUserFormSubmit, hideOverlay} from './form-upload.js';
 import './scale-change.js';

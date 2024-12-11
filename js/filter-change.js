@@ -1,8 +1,3 @@
-const effectValue = document.querySelector('.effect-level__value');
-const imagePreview = document.querySelector('.img-upload__preview img');
-const effectLevelContainer = document.querySelector('.img-upload__effect-level');
-const effectLevelSlider = document.querySelector('.effect-level__slider');
-
 const EFFECTS = [
   {
     effectName: 'none',
@@ -59,6 +54,11 @@ const EFFECTS = [
     querySelector: document.querySelector('#effect-heat'),
   },
 ];
+
+const effectValue = document.querySelector('.effect-level__value');
+const imagePreview = document.querySelector('.img-upload__preview img');
+const effectLevelContainer = document.querySelector('.img-upload__effect-level');
+const effectLevelSlider = document.querySelector('.effect-level__slider');
 
 noUiSlider.create(effectLevelSlider, {
   range: {
