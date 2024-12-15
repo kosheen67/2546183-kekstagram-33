@@ -9,7 +9,7 @@ const imagePreview = document.querySelector('.img-upload__preview img');
 
 let currentScale = 100;
 
-const updateScale = (newScaleValue) => {
+export const updateScale = (newScaleValue) => {
   currentScale = newScaleValue;
   scaleValue.value = `${currentScale}%`;
   imagePreview.style.transform = `scale(${currentScale / 100})`;

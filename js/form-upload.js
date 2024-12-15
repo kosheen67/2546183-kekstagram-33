@@ -2,6 +2,8 @@ import { isEscKey } from './util.js';
 import './filter-change.js';
 import { showNotificationMessage } from './result-message-form.js';
 import { sendData } from './api.js';
+import { updateScale } from './scale-change.js';
+import { resetEffects } from './filter-change.js';
 
 const HASHTAG_UNVALID = /[^\w\u0400-\u04FF]/;
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
@@ -32,6 +34,9 @@ const pristine = new Pristine(form, {
 const showOverlay = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
+
+  updateScale(100);
+  resetEffects();
 
   document.addEventListener('keydown', onEscKeydown);
 };
@@ -78,8 +83,7 @@ const validateHashtags = (value) => {
 pristine.addValidator(
   hashtagField,
   validateHashtags,
-  'Недопустимый хэштег'
-);
+  'Недопустимый хэштег');
 
 const hasValidCommentLength = (string) => string.length <= MAX_COMMENT_LENGTH;
 
@@ -119,7 +123,6 @@ const onFileInputChange = () => {
 };
 
 const setUserFormSubmit = async (forElement) => {
-
   const isValid = pristine.validate();
   if(isValid) {
     blockSubmitButton();

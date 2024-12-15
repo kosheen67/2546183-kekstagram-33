@@ -78,7 +78,6 @@ noUiSlider.create(effectLevelSlider, {
   },
 });
 
-
 effectLevelSlider.noUiSlider.on('update', () => {
   const value = effectLevelSlider.noUiSlider.get();
   effectValue.value = value;
@@ -121,5 +120,10 @@ EFFECTS.forEach((effect) => {
     }
   });
 });
+
+export const resetEffects = () => {
+  effectLevelContainer.style.display = 'none';
+  imagePreview.style.filter = '';
+};
 
 effectLevelContainer.style.display = 'none';
