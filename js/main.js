@@ -25,34 +25,45 @@ const photoDescriptionText = [
   'Мечта «не работать» не работает',
   'Мечтайте о великом: лишь великие мечты в силах затронуть людские душ'];
 
-Array.from({length: 25});
-// 1 создать функцию для создания массива из 25 объектов
+const messageText = ['Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
+const randomCommentatorName = ['Михаил', 'Александр', 'Артём', 'Максим', 'Иван', 'Дмитрий', 'Марк', 'Лев', 'Матвей', 'Андрей', 'Арсений', 'Владимир', 'Николай', 'Егор', 'Даниил', 'Алексей', 'Роман', 'Степан', 'Кирилл', 'Игорь', 'Тимофей', 'Павел', 'Георгий', 'Сергей', 'Григорий'];
 
-// 2 структура объекта
-
-// let obj = photoDescription {
-// id:1-25, не повторяется,
-
-// }
-
-//3 создать функцию, которая будет выводить уникальное число от 1 до 25 и не повторяться
+//Функция, которая будет выводить уникальное число от 1 до 25 и не повторяться
 function getRandomNumber(min, max) {
   const lower = Math.ceil(Math.min(min, max));
   const upper = Math.floor(Math.max(min, max));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 }
-//3.1 создать функцию по получению элемента массива
+//Функция по получению рандомного элемента массива
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
+//Конструктор комментариев
+const makePhotoComments = () => ({
+  id: getRandomNumber(1, 999),
+  avatar: `img/avatar-${ getRandomNumber(1, 6)}.svg`,
+  message: getRandomArrayElement(messageText),
+  name:getRandomArrayElement(randomCommentatorName)
+});
 
-//4 создать конструктор объектов
+//Конструктор объектов
 const makePhotoDescription = () => ({
   id: getRandomNumber(1, 25),
   url: `photos/${ getRandomNumber(1, 25)}.jpg`,
   description: getRandomArrayElement(photoDescriptionText),
-  likes: getRandomNumber(15, 200)
+  likes: getRandomNumber(15, 200),
+  comments: Array.from({length: getRandomNumber(1,31)}, makePhotoComments)
 });
 
-console.log(makePhotoDescription());
+// Функция для создания массива из 25 объектов
+const photoDescriptionList = Array.from({length: 25}, makePhotoDescription);
+
+console.log(photoDescriptionList);
+
+
