@@ -1,9 +1,10 @@
+//Проверка на длину строки
 function checkStringLength(string, maxLength) {
   return string.length <= maxLength;
 }
 checkStringLength('hello', 20);
 
-
+//Проверка на палиндромность
 function checkPalindrom(string) {
   const normalizedString = string.replaceAll(' ','').toLowerCase();
   let stringForCheck = '';
@@ -15,7 +16,7 @@ function checkPalindrom(string) {
 checkPalindrom('Dog and Cat');
 
 
-//Функция по переводу часв в минуты
+//Функция по переводу часов в минуты
 function makeHoursToMinutes (stringWithHours) {
   stringWithHours = stringWithHours.split(':');
   return stringWithHours[0] * 60 + Number(stringWithHours[1]);
@@ -33,4 +34,5 @@ function isCorrectTimeForMeeting (startWorkTime, endWorkTime, startMeetingTime, 
   }
   return false;
 }
+
 
