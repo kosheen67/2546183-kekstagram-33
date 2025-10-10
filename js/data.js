@@ -55,7 +55,6 @@ const makePhotoDescription = () => ({
 });
 
 // Функция для создания массива из 25 объектов
-const photoDescriptionList = Array.from({length: 25}, makePhotoDescription);
-console.log(photoDescriptionList);
+const createPhotoDescriptionList = () => Array.from({length: 25}, makePhotoDescription);
 
-export {photoDescriptionList};
+export {createPhotoDescriptionList};
