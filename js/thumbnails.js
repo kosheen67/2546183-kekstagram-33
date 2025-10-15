@@ -23,4 +23,5 @@ thumbnailsSet.forEach((thumbnail) => {
 });
 
 picturesSection.appendChild(pictureFragment);
+console.log(picturesSection);
 
