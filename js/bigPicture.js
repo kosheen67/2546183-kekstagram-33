@@ -5,25 +5,22 @@ const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
 //находим раздел с лайками у большой кратинки
 const likesCount = bigPicture.querySelector('.likes-count');
-const commentsCount = bigPicture.querySelector('.social__comment-shown-count');
+const commentsShownCount = bigPicture.querySelector('.social__comment-shown-count');
+
+const commentsTotalCount = bigPicture.querySelector('.social__comment-total-count');
+
+
 //Функция открытия большой картинки
 function openBigPicture (arrayElement) {
   bigPicture.classList.remove('hidden');
   bigPictureImg.src = arrayElement.url;
   likesCount.textContent = arrayElement.likes;
-  commentsCount.textContent = arrayElement.comments.length;
+
+  commentsTotalCount.textContent = arrayElement.comments.length;
+
+
   console.log(bigPicture);
+  console.log(arrayElement.comments);
 }
 
 export {openBigPicture};
-// openBigPicture();
-// const thumbnailsArray = document.querySelectorAll('.picture');
-// console.log(thumbnailsArray);
-// const bigPicture = document.querySelector('.big-picture');
-// function openBigPictureModule (element) {
-//   element.addEventListener('click', () =>{
-//     bigPicture.classList.remove('hidden');
-//   });
-// }
-
-
