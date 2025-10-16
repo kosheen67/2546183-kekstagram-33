@@ -1,13 +1,23 @@
-//отрисовка окна с полноразмерным изображением
-//1 найти раздел big-picture
+//раздел с полноценным фото
+const bigPicture = document.querySelector('.big-picture');
+
+//находим img в этом разделе
+const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
+
+//
 //2 Найти раздел pictures
-//3 function onThumbnailClick (event) {
-//if (event.target.matches('a[class='picture']'))
-//{ 1. раздел big-picture теряет класс hidden
-//2. const img = pictures.querySelector('img')
-//3. img.src=
+function openBigPicture (element) {
 
-//}
-//}
 
-//функция pictures.addEventLIstener('click', onThumbnailClick)
+}
+// const thumbnailsArray = document.querySelectorAll('.picture');
+// console.log(thumbnailsArray);
+// const bigPicture = document.querySelector('.big-picture');
+// function openBigPictureModule (element) {
+//   element.addEventListener('click', () =>{
+//     bigPicture.classList.remove('hidden');
+//   });
+// }
+
+// openBigPictureModule(thumbnailsArray);
+
