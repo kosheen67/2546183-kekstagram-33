@@ -10,7 +10,7 @@ const pictureFragment = document.createDocumentFragment();
 
 //функция перебора массива из 25 объектов
 const thumbnailsSet = createPhotoDescriptionList();
-console.log(thumbnailsSet);
+
 
 thumbnailsSet.forEach((thumbnailElement, thumbnailIndex) => {
   const pictureElement = pictureTemplate.cloneNode(true);
@@ -27,7 +27,7 @@ thumbnailsSet.forEach((thumbnailElement, thumbnailIndex) => {
     //вместо консоли мы будем выполнять функцию openBigPicture())
     openBigPicture(thumbnailsSet[thumbnailIndex]);
   });
-  console.log(thumbnailsSet[thumbnailIndex]);
+
 
 });
 picturesSection.appendChild(pictureFragment);
