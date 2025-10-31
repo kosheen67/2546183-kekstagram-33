@@ -19,7 +19,6 @@ function changeScale(clickedScale) {
   // Изменяем значение
   if(clickedScale === 'smaller') {
     currentScaleValue = currentScaleValue - scaleOptions.STEP;
-    console.log(`scale(${currentScaleValue / 100})`);
   } else {
     currentScaleValue = currentScaleValue + scaleOptions.STEP;
 
@@ -40,6 +39,3 @@ function changeScale(clickedScale) {
 
 scaleControlSmaller.addEventListener('click', () => changeScale('smaller'));
 scaleControlBigger.addEventListener('click', () => changeScale('bigger'));
-
-
-// При изменении значения поля .scale__control--value изображению внутри .img-upload__preview должен добавляться соответствующий стиль CSS, который с помощью трансформации scale задаёт масштаб. Например, если в поле стоит значение 75%, то в стиле изображения должно быть написано transform: scale(0.75).
