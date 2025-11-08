@@ -4,3 +4,4 @@ import './bigPicture.js';
 import './form-upload.js';
 import './scale-change.js';
 import './filter-change.js';
+import './api.js';
