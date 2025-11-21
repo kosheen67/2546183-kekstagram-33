@@ -9,7 +9,7 @@ const httpRequest = function(url, options = {}) {//Пойти на сервер 
       if(!response.ok) {
         throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
       }
-      return response.json();//Перевести ответ с "серверного языка" на "человеческий" (JSON → объект),Вернуть фотографии твоей программе
+      return response.json();//Перевести ответ с "серверного языка" на "человеческий" (JSON → объект)
     })
     .catch((error) =>{
       // Обрабатываем ошибки сети
@@ -20,7 +20,7 @@ const httpRequest = function(url, options = {}) {//Пойти на сервер 
       throw error;
     });
 };
-//Функция для получения данных с сервера(GET)
+//Функция для получения данных с сервера (GET)
 const getData = () => httpRequest('/data');
 
 //Функция для отправки данных на сервер(POST)
