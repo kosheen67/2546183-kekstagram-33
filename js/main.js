@@ -3,7 +3,7 @@ import './bigPicture.js';
 import './form-upload.js';
 import './scale-change.js';
 import './filter-change.js';
-import { getData} from './api.js';
+import { getData } from './api.js';
 
 // Функция показа сообщения об ошибке загрузки данных
 const showDataError = () => {
