@@ -1,11 +1,11 @@
 import { renderThumbnails } from './thumbnails.js';
 import { debounce } from './util.js';
 
-// Модуль фильтрации
+// Константы для фильтров
 const Filter = {
   DEFAULT: 'filter-default',
-  RANDOM:'filter-random',
-  DISCUSSED: 'filter-discussed',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed'
 };
 
 // Глобальные переменные
@@ -15,24 +15,34 @@ let pictures = [];
 // Функция для показа блока фильтров
 const showFilters = () => {
   const filtersElement = document.querySelector('.img-filters');
-  filtersElement.classList.remove('img-filters--inactive');
+  if (filtersElement) {
+    filtersElement.classList.remove('img-filters--inactive');
+    console.log('✅ Фильтры показаны');
+  }
 };
 
 // Функции фильтрации
-//1
-const getDefaultPictures = () => pictures;
-
-//2
-const getRandomPictures = () => {
-  const shuffled = [...pictures].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 10);
+const getDefaultPictures = () => {
+  console.log('🔄 Фильтр: По умолчанию', pictures.length);
+  return pictures;
 };
 
-//3
-const getDiscussedPictures = () => [...pictures].sort((a, b) => b.comments.length - a.comments.length);
+const getRandomPictures = () => {
+  const shuffled = [...pictures].sort(() => Math.random() - 0.5);
+  const result = shuffled.slice(0, 10);
+  console.log('🔄 Фильтр: Случайные', result.length);
+  return result;
+};
+
+const getDiscussedPictures = () => {
+  const result = [...pictures].sort((a, b) => b.comments.length - a.comments.length);
+  console.log('🔄 Фильтр: Обсуждаемые', result.length);
+  return result;
+};
 
 // Основная функция фильтрации
 const getFilteredPictures = () => {
+  console.log('🎯 Текущий фильтр:', currentFilter);
   switch (currentFilter) {
     case Filter.RANDOM:
       return getRandomPictures();
@@ -46,24 +56,37 @@ const getFilteredPictures = () => {
 
 // Функция обновления отображения
 const updatePictures = () => {
-// Удаляем предыдущие фотографии
+  console.log('🔄 Начинаем обновление картинок...');
+
+  // Удаляем предыдущие фотографии
   const picturesContainer = document.querySelector('.pictures');
   const currentPictures = picturesContainer.querySelectorAll('.picture');
+
+  console.log('🗑️ Удаляем картинок:', currentPictures.length);
   currentPictures.forEach((picture) => {
     picture.remove();
   });
-};
-// Получаем отфильтрованные фотографии
-const filteredPictures = getFilteredPictures();
 
-// Отрисовываем новые фотографии
-renderThumbnails(filteredPictures);
+  // Получаем отфильтрованные фотографии
+  const filteredPictures = getFilteredPictures();
+  console.log('🖼️ Отфильтровано картинок:', filteredPictures.length);
+
+  // Отрисовываем новые фотографии
+  if (filteredPictures.length > 0) {
+    renderThumbnails(filteredPictures);
+    console.log('✅ Новые картинки отрисованы');
+  } else {
+    console.error('❌ Нет картинок для отрисовки!');
+  }
+};
 
 // Создаем debounced версию функции обновления
 const debouncedUpdate = debounce(updatePictures, 500);
 
 // Функция обновления активного фильтра
 const updateActiveFilter = (newFilter) => {
+  console.log('🎛️ Меняем фильтр с', currentFilter, 'на', newFilter);
+
   // Удаляем класс активности у текущего фильтра
   const currentActiveButton = document.querySelector('.img-filters__button--active');
   if (currentActiveButton) {
@@ -75,6 +98,7 @@ const updateActiveFilter = (newFilter) => {
   if (newActiveButton) {
     newActiveButton.classList.add('img-filters__button--active');
   }
+
   currentFilter = newFilter;
 };
 
@@ -83,12 +107,16 @@ const onFilterChange = (evt) => {
   if (!evt.target.classList.contains('img-filters__button')) {
     return;
   }
+
   const newFilter = evt.target.id;
+  console.log('🖱️ Клик по фильтру:', newFilter);
 
   // Игнорируем клик по уже активному фильтру
   if (newFilter === currentFilter) {
+    console.log('⏭️ Фильтр уже активен, пропускаем');
     return;
   }
+
   // Обновляем активный фильтр
   updateActiveFilter(newFilter);
 
@@ -99,6 +127,7 @@ const onFilterChange = (evt) => {
 // Инициализация фильтров
 const initFilters = (loadedPictures) => {
   pictures = loadedPictures;
+  console.log('📸 Загружено картинок:', pictures.length);
 
   // Показываем блок фильтров
   showFilters();
@@ -107,6 +136,9 @@ const initFilters = (loadedPictures) => {
   const filtersForm = document.querySelector('.img-filters__form');
   if (filtersForm) {
     filtersForm.addEventListener('click', onFilterChange);
+    console.log('✅ Обработчики фильтров добавлены');
+  } else {
+    console.error('❌ Форма фильтров не найдена!');
   }
 
   // Устанавливаем фильтр по умолчанию как активный
