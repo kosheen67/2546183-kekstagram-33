@@ -4,6 +4,8 @@ import './form-upload.js';
 import './scale-change.js';
 import './filter-change.js';
 import { getData } from './api.js';
+import { initFilters } from './sorting.js';
+import { showErrorMessage } from './message.js';
 
 // Функция показа сообщения об ошибке загрузки данных
 const showDataError = () => {
@@ -57,3 +59,23 @@ const loadPhotosFromServer = () => {
 document.addEventListener('DOMContentLoaded', () => {
   loadPhotosFromServer();
 });
+
+
+// Основная функция инициализации приложения
+const initApp = () => {
+  getData()
+    .then((photos) => {
+      // Отрисовываем первоначальные миниатюры
+      renderThumbnails(photos);
+
+      // Инициализируем фильтры
+      initFilters(photos);
+    })
+    .catch((error) => {
+      console.error('Ошибка загрузки фотографий:', error);
+      showErrorMessage('Не удалось загрузить фотографии. Попробуйте обновить страницу.');
+    });
+};
+
+// Запускаем приложение когда DOM загружен
+document.addEventListener('DOMContentLoaded', initApp);

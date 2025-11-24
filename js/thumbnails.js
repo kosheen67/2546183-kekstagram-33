@@ -1,6 +1,5 @@
 import {openBigPicture} from './bigPicture.js';
 
-
 const renderThumbnails = (photos) => {
 //вытащить шаблон
   const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
