@@ -1,9 +1,11 @@
-//Этап 1: Подготовка элементов
 const sliderContainer = document.querySelector('.effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const imagePreview = document.querySelector('.img-upload__preview img');
 const filters = document.querySelectorAll('input[name = "effect"]');
+
+// Сохраняем ссылку на слайдер в глобальной области
+window.sliderElement = sliderElement;
 
 // Изначально скрываем слайдер (для эффекта "Оригинал" по умолчанию)
 sliderContainer.classList.add('hidden');
@@ -74,7 +76,7 @@ function updateSliderForEffect(selectedFilter) {
   }
 }
 
-// 🔥 ДОБАВЛЕНА функция применения CSS-фильтра
+// функция применения CSS-фильтра
 function applyFilter(effect, value) {
   const filtersCSS = {
     chrome: `grayscale(${value})`,
@@ -88,3 +90,20 @@ function applyFilter(effect, value) {
   // Применяем фильтр или удаляем его для "Оригинала"
   imagePreview.style.filter = filtersCSS[effect] || 'none';
 }
+
+// Функция сброса фильтров
+const resetFilters = () => {
+  const originalEffect = document.querySelector('#effect-none');
+  if (originalEffect) {
+    originalEffect.checked = true;
+  }
+  imagePreview.style.filter = 'none';
+  sliderContainer.classList.add('hidden');
+  sliderElement.noUiSlider.updateOptions({
+    range: { min: 0, max: 100 },
+    start: 100,
+    step: 1
+  });
+};
+
+export { resetFilters };

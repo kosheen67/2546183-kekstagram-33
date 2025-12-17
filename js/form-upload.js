@@ -1,4 +1,6 @@
 import { sendData } from './api.js';
+import { resetScale } from './scale-change.js';
+import { resetFilters } from './filter-change.js';
 
 const body = document.querySelector('body');
 const uploadForm = body.querySelector('.img-upload__form');//форма с # и комментами
@@ -7,6 +9,7 @@ const overlay = body.querySelector('.img-upload__overlay');//загруженн�
 const uploadCloseButton = body.querySelector('.img-upload__cancel');//кнопка закрытия загруженного фото
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 const HASHTAG_REGEX = /^#[a-zа-яё0-9]{1,19}$/i;
+const effectsPreviews = document.querySelectorAll('.effects__preview');
 
 //Находим элементы для сброса
 const scaleControl = uploadForm.querySelector('.scale__control--value');
@@ -15,6 +18,61 @@ const hashtagsField = uploadForm.querySelector('.text__hashtags');
 const commentField = uploadForm.querySelector('.text__description');
 const imagePreview = uploadForm.querySelector('.img-upload__preview img');
 
+
+// Функция для загрузки и отображения выбранной фотографии
+const loadUserPhoto = (file) => {
+  const reader = new FileReader();
+
+  reader.addEventListener('load', () => {
+    // Устанавливаем загруженное изображение в основное превью
+    imagePreview.src = reader.result;
+
+    // 🔥 ДОБАВЛЕНО: Устанавливаем загруженное изображение в превью фильтров
+    effectsPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url(${reader.result})`;
+    });
+  });
+
+  reader.readAsDataURL(file);
+};
+
+// Валидация файла
+const validateFile = (file) => {
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+  const maxSize = 5 * 1024 * 1024; // 5MB
+
+  if (!file) {
+    return false;
+  }
+
+  if (!allowedTypes.includes(file.type)) {
+    alert('Пожалуйста, выберите файл в формате JPEG, PNG, GIF или WebP');
+    return false;
+  }
+
+  if (file.size > maxSize) {
+    alert('Файл слишком большой. Максимальный размер: 5MB');
+    return false;
+  }
+
+  return true;
+};
+
+// 🔥 ДОБАВЛЕНО: Обновленный обработчик открытия формы
+const onFileInputChange = (evt) => {
+  const file = evt.target.files[0];
+
+  if (file && validateFile(file)) {
+    loadUserPhoto(file);
+    showOverlay();
+  } else {
+    // Сбрасываем input если файл невалидный
+    imageUploadInput.value = '';
+  }
+};
+
+imageUploadInput.addEventListener('change', onFileInputChange);
+
 //валидация формы
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -22,23 +80,16 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'img-upload__field-wrapper--error',
 });
 
-// 🔥 ДОБАВЛЕНО: Функция полного сброса формы в исходное состояние
+//  Функция полного сброса формы в исходное состояние
 const resetFormToInitialState = () => {
   // 1. Сбрасываем стандартные поля формы
   uploadForm.reset();
 
   // 2. Возвращаем масштаб к 100%
-  if (scaleControl) {
-    scaleControl.value = '100%';
-  }
+  resetScale();
 
   // 3. Сбрасываем эффект на «Оригинал»
-  if (effectsList) {
-    const originalEffect = effectsList.querySelector('#effect-none');
-    if (originalEffect) {
-      originalEffect.checked = true;
-    }
-  }
+  resetFilters();
 
   // 4. Очищаем поля ввода (на всякий случай)
   if (hashtagsField) {
@@ -51,7 +102,13 @@ const resetFormToInitialState = () => {
   // 5. Убираем CSS фильтры с изображения
   if (imagePreview) {
     imagePreview.style.filter = 'none';
+    imagePreview.src = 'img/upload-default-image.jpg';
   }
+
+  // 🔥 ДОБАВЛЕНО: Сбрасываем превью фильтров
+  effectsPreviews.forEach((preview) => {
+    preview.style.backgroundImage = '';
+  });
 
   // 6. Сбрасываем валидацию Pristine
   pristine.reset();
@@ -66,7 +123,22 @@ const resetFormToInitialState = () => {
   if (effectLevel) {
     effectLevel.classList.add('hidden');
   }
+
+  // 8. Скрываем слайдер эффектов
+  if (effectLevel) {
+    effectLevel.classList.add('hidden');
+  }
+
+  // 🔥 ДОБАВЛЕНО: Сбрасываем слайдер
+  if (window.sliderElement && window.sliderElement.noUiSlider) {
+    window.sliderElement.noUiSlider.updateOptions({
+      range: { min: 0, max: 100 },
+      start: 100,
+      step: 1
+    });
+  }
 };
+
 
 // Функции блокировки кнопки
 const blockSubmitButton = () => {
@@ -169,9 +241,6 @@ function closeUploadForm(){
   body.classList.remove('modal-open');
   resetFormToInitialState();
 }
-
-//Обработчик открытия формы
-imageUploadInput.addEventListener('change', showOverlay);
 
 // Клик на кнопку закрытия
 uploadCloseButton.addEventListener('click', closeUploadForm);
@@ -277,3 +346,4 @@ const resetButton = uploadForm.querySelector('.img-upload__cancel[type="reset"]'
 if (resetButton) {
   resetButton.addEventListener('click', resetFormToInitialState);
 }
+

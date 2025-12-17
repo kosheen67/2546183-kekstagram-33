@@ -1,7 +1,7 @@
 const scaleControlSmaller = document.querySelector('.scale__control--smaller');
 const scaleControlBigger = document.querySelector('.scale__control--bigger');
 const scaleControlInput = document.querySelector('.scale__control--value');
-const imgUploadPreview = document.querySelector('.img-upload__preview');
+const imgUploadPreview = document.querySelector('.img-upload__preview img');
 
 
 const scaleOptions = {
@@ -39,3 +39,11 @@ function changeScale(clickedScale) {
 
 scaleControlSmaller.addEventListener('click', () => changeScale('smaller'));
 scaleControlBigger.addEventListener('click', () => changeScale('bigger'));
+
+// Функция сброса масштаба
+const resetScale = () => {
+  scaleControlInput.value = `${scaleOptions.DEFAULT}%`;
+  imagePreview.style.transform = `scale(${scaleOptions.DEFAULT / 100})`;
+};
+
+export { resetScale }; // экспорт для использования в form-upload
